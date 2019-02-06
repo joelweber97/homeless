@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Insert Location</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="custom3.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<script>
+		var today = moment().format('YYYY-MM-DD');
+		$('#rpDate').val(today);
+	</script>
+  <script>
+	  
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                
+            }
+        }
+  
+        function showPosition(position) {
+            var lat = position.coords.latitude.toFixed(6);
+            var lng = position.coords.longitude.toFixed(6);
+            document.getElementById('lng').value = lng;
+            document.getElementById('lat').value = lat;
+        };
+
+
+	</script>
+	
+
+
+	<script type="text/javascript">
+        function setDate() {
+            var date = new Date();
+
+            var day = date.getDate();
+            var month = date.getMonth() + 1;
+            var year = date.getFullYear();
+
+            if (month < 10) month = "0" + month;
+            if (day < 10) day = "0" + day;
+
+            var today = year + "-" + month + "-" + day;
+
+            document.getElementById('rpDate').value = today;
+        }
+    </script>
+
+</head>
+<body onload="getLocation(); setDate()">
+	<br />
+	<br />
+	
+	
+
+
+
+
+	<div class="container">
+		<header class="row">
+		</header>
+		
+		<div class="row">
+			<nav class="navbar navbar-default">	  	
+				<div class="container-fluid">
+				  
+				    <div class="navbar-header">
+				    	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+				        	<span class="sr-only">Toggle navigation</span>
+				        	<span class="icon-bar"> </span>
+				        	<span class="icon-bar"> </span>
+				        	<span class="icon-bar"> </span>
+				      	</button>
+				      	<a class="navbar-brand" href="index.html">Mapping Homeless Populations</a>
+				    </div>
+	
+				  
+				    <div class="collapse navbar-collapse" id="navbar">
+				    	<ul class="nav navbar-nav navbar-right">
+				        	<li><a href="index.html">Home</a></li>
+				        	<li><a href="report_homeless.html">Add Location</a></li>
+							<li><a href="show_homeless.php">Map</a></li>
+				        	<li><a href="help.html">How To Help</a></li>
+				        	<li><a href="contact.html">Contact</a></li>
+				      	</ul>
+				    </div><!-- end navbar-collapse -->
+			  </div><!-- end container-fluid -->
+			</nav>
+		</div>
+	
+	    <div id="content">
+			<h1>Insert Homeless Information</h1>
+			<br />
+			
+			
+			<div id ="report" class="row">
+				<form method="post" action="insert_homeless.php" enctype="multipart/form-data" class="form-horizontal">  
+					
+
+					<div class="form-group">
+						<label class="control-label col-sm-4 col-xs-3">Age:</label>
+						<div class="btn-group col-sm-8 col-xs-8" data-toggle="buttons">
+							<label class= "col-sm-2 btn btn-warning"><input type="radio" name="rbAge" value="juvenile">Juvenile</label>
+							<label class="col-sm-2 btn btn-warning"><input type="radio" name="rbAge"value="adult"/>Adult</label>
+							<label class="col-sm-2 btn btn-warning"><input type="radio" name="rbAge" value="unknown"/>Unknown</label>
+						</div>
+					</div>
+	 				
+					
+					<div class="form-group">
+						<label class="control-label col-sm-4 col-xs-3">Gender:</label>
+						<div class="btn-group col-sm-8 col-xs-8" data-toggle="buttons">
+							<label class="col-sm-2 btn btn-warning">
+						    	<input type="radio" name="rbGender" value="male"> Male 
+						  	</label>
+						  	<label class="col-sm-2 btn btn-warning">
+						    	<input type="radio" name="rbGender" value="female"> Female
+						  	</label>
+						  	<label class="col-sm-2 btn btn-warning">
+						    	<input type="radio" name="rbGender" value="unknown"> Unknown
+						  	</label>
+						</div>
+					</div>
+					
+					
+					<div class="form-group">
+						<label class="control-label col-sm-4 col-xs-3">Activity:</label>
+						<div class="btn-group col-sm-8 col-xs-18" data-toggle="buttons">
+							<label class="col-sm-2 btn btn-warning">
+						    	<input type="radio" name="activity" value="sleeping"> Sleeping 
+						  	</label>
+						  	<label class="col-sm-2 btn btn-warning">
+						    	<input type="radio" name="activity" value="begging"> Begging
+						  	</label>
+						  	<label class="col-sm-2 btn btn-warning">
+						    	<input type="radio" name="activity" value="relocating"> Relocating
+						  	</label>
+						</div>
+					</div>					
+					
+
+					<div class="form-group">
+						<label for="rpDate" class="control-label col-sm-4">Report Date:</label>
+						<div class="col-sm-6">
+							<input type="date" name="rpDate" id="rpDate" class="form-control" placeholder="mm/dd/yyyy" />
+						</div>		
+					</div>
+					
+					<div class="form-group">
+						<label for="location" class="control-label col-sm-4">Location:</label>
+						<div class="col-sm-6">
+							<input type="text" name="location" id="location" class="form-control" placeholder="Address" />
+						</div>
+					</div>
+				
+					<div class="form-group">
+						<label for="lat" class="control-label col-sm-4">Latitude:</label> 
+						<div class="col-sm-6">
+							<input type="number" name="lat" id="lat" class="form-control" placeholder="Degrees" min="-90" max="90" step="0.000001" />
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label for="lng" class="control-label col-sm-4">Longitude:</label>
+						<div class="col-sm-6">
+							<input type="number" name="lng" id="lng" class="form-control" placeholder="Degrees" min="-180" max="180" step="0.000001" />
+						</div>
+					</div>
+
+					
+					
+				   <div class="col-sm-offset-4 col-sm-8 col-xs-offset-4 col-xs-8">
+						<input type="submit" id="submit" value="Submit" class="btn btn-warning col-sm-2"/>
+				   </div>
+					
+				</form>
+			</div>
+		</div> 
+		
+		<footer class="text-center">
+				<p>J--W--&copy;<br />
+				University of Maryland<br />
+				Geog657 Web Programming<br />
+				<img src="images/umdshell.png" alt="shell" style="width:40px; height:auto;">
+				</p>
+			</footer>
+    </div>
+</body>
+</html>

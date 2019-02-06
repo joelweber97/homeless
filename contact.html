@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Contact</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="custom3.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<br />
+	<br />
+	
+	<div class="container">
+		<header class="row">
+		</header>
+		
+		<div class="row">
+			<nav class="navbar navbar-default">	  	
+				<div class="container-fluid">
+				  
+				    <div class="navbar-header">
+				    	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+				        	<span class="sr-only">Toggle navigation</span>
+				        	<span class="icon-bar"> </span>
+				        	<span class="icon-bar"> </span>
+				        	<span class="icon-bar"> </span>
+				      	</button>
+				      	<a class="navbar-brand" href="index.html">Mapping Homeless Populations</a>
+				    </div>
+	
+				  
+				    <div class="collapse navbar-collapse" id="navbar">
+				    	<ul class="nav navbar-nav navbar-right">
+				        	<li><a href="index.html">Home</a></li>
+				        	<li><a href="report_homeless.html">Add Location</a></li>
+							<li><a href="show_homeless.php">Map</a></li>
+				        	<li><a href="help.html">How To Help</a></li>
+				        	<li><a href="contact.html">Contact</a></li>
+				      	</ul>
+				    </div><!-- end navbar-collapse -->
+			  </div><!-- end container-fluid -->
+			</nav>
+		</div>
+	
+	    			<div id="content">
+				<h1 class="contact">Contact</h1>
+				
+				<form method="post" action="gmail.php"  class="form-horizontal">  
+					
+					<div class="form-group">
+						<label for="senderName" class="control-label col-sm-3">Sender Name:</label>
+						<div class="col-sm-8">
+							<input type="text" id="senderName" name="senderName" class="form-control"/>	
+						</div>
+					</div>
+					
+					
+					<div class="form-group">
+						<label for="senderEmail" class="control-label col-sm-3">Sender Email:</label>
+						<div class="col-sm-8">
+							<input type="text" id="senderEmail" name="senderEmail" class="form-control"/>	
+						</div>
+					</div>
+					
+					
+					<div class="form-group">
+						<label for="subject" class="control-label col-sm-3">Subject:</label>
+						<div class="col-sm-8">
+							<input type="text" id="subject" name="subject" class="form-control"/>	
+						</div>
+					</div>
+					
+					
+					
+					<div class="form-group">
+						<label for="message" class="control-label col-sm-3">Message:</label>
+						<div class="col-sm-8">
+							<textarea class="form-control" rows="5" id="message" name="message"></textarea>
+						</div>
+					</div>
+					
+					
+					
+				   <div class="col-sm-offset-3 col-sm-9 col-xs-offset-2 col-xs-9">
+						<input type="submit" id="send" value="Send" class="btn btn-warning col-sm-3"/>
+				   </div>
+					
+					
+					</form>
+				
+						
+			</div>
+			</div>
+			
+	
+		<footer class="text-center">
+				<p>J--W--&copy;<br />
+				University of Maryland<br />
+				Geog657 Web Programming<br />
+				<img src="images/umdshell.png" alt="shell" style="width:40px; height:auto;">
+				</p>
+			</footer>
+    
+</body>
+</html>
