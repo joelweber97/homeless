@@ -16,32 +16,19 @@
        		* element that contains the map. */
       		#map {
 				height: 90%;
-				width: 90%;
+				width: 85%;
       			}
       		/* Optional: Makes the sample page fill the window. */
-      		html, body {
+      		html, body{
         		height: 90%;
         		
         		padding: 0;
 				}
 
 		</style>
-  		<script>
-			// Initialize and add the map
-			function initMap() {
-			  // The location of Uluru
-			  var uluru = {lat: -25.344, lng: 131.036};
-			  // The map, centered at Uluru
-			  var map = new google.maps.Map(
-				  document.getElementById('map'), {zoom: 4, center: uluru});
-			  // The marker, positioned at Uluru
-			  var marker = new google.maps.Marker({position: uluru, map: map});
-			}
-				</script>
 
-		<script async defer
-			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMllrEXr-1ZCrVZhQDwMvui_41aI7vYjU&callback=initMap">
-		</script>
+
+
 	</head>
 	
 	<body>
@@ -81,28 +68,96 @@
 			</div>
 		
 		</div>
-		<?php
-			
-			
-			require_once("db.php");
 
-			
-			$sql = "select * from markers";
-			$result = mysqli_query($con, $sql);
-			
-			if(!$result){
-				die("Invalid query: " . mysqli_error($con));
-				
-			}
-						
-		?>
 
 		<div id="map"></div>
 
+		<script>
+      var customLabel = {
+        Male: {
+          label: 'M'
+        },
+        Female: {
+          label: 'F'
+        },
+				Unknown: {
+					label: 'U'
+				},
+      };
 
+        function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: new google.maps.LatLng(38, -79),
+          zoom: 6
+        });
+        var infoWindow = new google.maps.InfoWindow;
+
+          // Change this depending on the name of your PHP or XML file
+          downloadUrl('./phpsqlajax_genxml2.php', function(data) {
+            var xml = data.responseXML;
+						console.log(xml)
+            var markers = xml.documentElement.getElementsByTagName('marker');
+            Array.prototype.forEach.call(markers, function(markerElem) {
+              var age = markerElem.getAttribute('age');
+							console.log(age)
+              var gender = markerElem.getAttribute('gender');
+              var activity = markerElem.getAttribute('activity');
+							var date = markerElem.getAttribute('date');
+              var point = new google.maps.LatLng(
+                  parseFloat(markerElem.getAttribute('latitude')),
+                  parseFloat(markerElem.getAttribute('longitude')));
+							var location = markerElem.getAttribute('location');
+							
+							
+              var infowincontent = document.createElement('div');
+              var strong = document.createElement('strong');
+              strong.textContent = gender
+              infowincontent.appendChild(strong);
+              infowincontent.appendChild(document.createElement('br'));
+
+              var text = document.createElement('text');
+              text.textContent = location;
+              infowincontent.appendChild(text);
+              var icon = customLabel[gender] || {};
+              var marker = new google.maps.Marker({
+                map: map,
+                position: point,
+                label: icon.label
+              });
+              marker.addListener('click', function() {
+                infoWindow.setContent(infowincontent);
+                infoWindow.open(map, marker);
+              });
+            });
+          });
+        }
+
+				
+
+      function downloadUrl(url, callback) {
+        var request = window.ActiveXObject ?
+            new ActiveXObject('Microsoft.XMLHTTP') :
+            new XMLHttpRequest();
+
+        request.onreadystatechange = function() {
+          if (request.readyState == 4) {
+            request.onreadystatechange = doNothing;
+            callback(request, request.status);
+          }
+        };
+
+        request.open('GET', url, true);
+        request.send(null);
+      }
+
+      function doNothing() {}
+    </script>
 		
+		<script async defer
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMllrEXr-1ZCrVZhQDwMvui_41aI7vYjU&callback=initMap">
+	</script>
 
-
+	
 	</body>
 </html>
 

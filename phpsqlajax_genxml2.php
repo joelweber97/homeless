@@ -36,6 +36,7 @@ while ($row = @mysqli_fetch_assoc($result)){
   echo 'age="' . parseToXML($row['age']) . '" ';
   echo 'gender="' . parseToXML($row['gender']) . '" ';
   echo 'activity="' . parseToXML($row['activity']) . '" ';
+  echo 'date="' . $row['date'] . '" ';
   echo 'latitude="' . $row['latitude'] . '" ';
   echo 'longitude="' . $row['longitude'] . '" ';
   echo 'location="' . $row['location'] . '" ';
